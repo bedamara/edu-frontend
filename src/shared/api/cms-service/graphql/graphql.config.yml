@@ -1,0 +1,5 @@
+schema:
+  - ${CMS_SERVICE_GRAPHQL}:
+
+projects:
+documents: '**/*.gql'

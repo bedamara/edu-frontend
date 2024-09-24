@@ -1,0 +1,205 @@
+query LoadAttempts($filters: AttemptFiltersInput, $publicationState: PublicationState, $pagination: PaginationArg, $sort: [String], $attemptTaskValuesPublicationState2: PublicationState, $attemptTaskValuesPagination2: PaginationArg) {
+    attempts(filters: $filters, publicationState: $publicationState, pagination: $pagination, sort: $sort) {
+        data {
+            id
+            attributes {
+                CompletedAt
+                slug
+                Status
+                Test {
+                    data {
+                        id
+                        attributes {
+                            slug
+                            CompleteTestBefore
+                        }
+                    }
+                }
+                Student {
+                    data {
+                        id
+                    }
+                }
+                publishedAt
+                AttemptTaskValues(publicationState: $attemptTaskValuesPublicationState2, pagination: $attemptTaskValuesPagination2) {
+                    data {
+                        id
+                        attributes {
+                            IsCorrect
+                            Task {
+                                data {
+                                    id
+                                }
+                            }
+                            Attempt {
+                                data {
+                                    id
+                                }
+                            }
+                            Value
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+query LoadAllAttemptsByIds($publicationState: PublicationState, $pagination: PaginationArg, $filters: AttemptFiltersInput, $attemptTaskValuesPublicationState2: PublicationState, $attemptTaskValuesPagination2: PaginationArg, $tasksPublicationState2: PublicationState, $tasksPagination2: PaginationArg) {
+    attempts(publicationState: $publicationState, pagination: $pagination, filters: $filters) {
+        data {
+            id
+            attributes {
+                CompletedAt
+                slug
+                Status
+                Student {
+                    data {
+                        id
+                    }
+                }
+                Test {
+                    data {
+                        attributes {
+                            slug
+                            CompleteTestBefore
+                            Tasks(publicationState: $tasksPublicationState2, pagination: $tasksPagination2) {
+                                data {
+                                    id
+                                }
+                            }
+                        }
+                        id
+                    }
+                }
+                publishedAt
+                AttemptTaskValues(publicationState: $attemptTaskValuesPublicationState2, pagination: $attemptTaskValuesPagination2) {
+                    data {
+                        id
+                        attributes {
+                            IsCorrect
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+mutation CreateAttempt($data: AttemptInput!) {
+    createAttempt(data: $data) {
+        data {
+            id
+            attributes {
+                CompletedAt
+                slug
+                Status
+                Test {
+                    data {
+                        id
+                        attributes {
+                            slug
+                        }
+                    }
+                }
+                Student {
+                    data {
+                        id
+                    }
+                }
+                publishedAt
+            }
+        }
+    }
+}
+
+mutation UpdateAttempt($updateAttemptId: ID!, $data: AttemptInput!) {
+    updateAttempt(id: $updateAttemptId, data: $data) {
+        data {
+            id
+        }
+    }
+}
+
+mutation CreateAttemptTaskValue($data: AttemptTaskValueInput!) {
+    createAttemptTaskValue(data: $data) {
+        data {
+            id
+            attributes {
+                Attempt {
+                    data {
+                        id
+                    }
+                }
+                IsCorrect
+                Task {
+                    data {
+                        id
+                    }
+                }
+                Value
+                publishedAt
+            }
+        }
+    }
+}
+
+mutation UpdateAttemptTaskValue($updateAttemptTaskValueId: ID!, $data: AttemptTaskValueInput!) {
+    updateAttemptTaskValue(id: $updateAttemptTaskValueId, data: $data) {
+        data {
+            id
+            attributes {
+                publishedAt
+                Value
+                Task {
+                    data {
+                        id
+                    }
+                }
+                IsCorrect
+                Attempt {
+                    data {
+                        id
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+query LoadAllAttemptValues($publicationState: PublicationState, $pagination: PaginationArg, $filters: AttemptFiltersInput, $attemptTaskValuesPublicationState2: PublicationState, $attemptTaskValuesPagination2: PaginationArg) {
+    attempts(publicationState: $publicationState, pagination: $pagination, filters: $filters) {
+        data {
+            id
+            attributes {
+                Student {
+                    data {
+                        id
+                    }
+                }
+                AttemptTaskValues(publicationState: $attemptTaskValuesPublicationState2, pagination: $attemptTaskValuesPagination2) {
+                    data {
+                        attributes {
+                            IsCorrect
+                            Task {
+                                data {
+                                    id
+                                    attributes {
+                                        Theme {
+                                            data {
+                                                id
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+mutation CreateTest($data: TestInput!) {
+    createTest(data: $data) {
+        data {
+            id
+            attributes {
+                slug
+            }
+        }
+    }
+}
+
+query LoadTestBySlug($filters: TestFiltersInput, $publicationState: PublicationState, $pagination: PaginationArg, $tasksPagination2: PaginationArg, $assignedToPagination2: PaginationArg) {
+    tests(filters: $filters, publicationState: $publicationState, pagination: $pagination) {
+        data {
+            id
+            attributes {
+                CompleteTestBefore
+                AvailableAttempts
+                Tasks(pagination: $tasksPagination2) {
+                    data {
+                        id
+                    }
+                }
+                MadeBy {
+                    data {
+                        id
+                    }
+                }
+                AssignedTo(pagination: $assignedToPagination2) {
+                    data {
+                        id
+                    }
+                }
+                publishedAt
+            }
+        }
+    }
+}
+
+query LoadAllUserTests($publicationState: PublicationState, $pagination: PaginationArg, $filters: TestFiltersInput, $tasksPagination2: PaginationArg, $assignedToPagination2: PaginationArg) {
+    tests(publicationState: $publicationState, pagination: $pagination, filters: $filters) {
+        data {
+            id
+            attributes {
+                AvailableAttempts
+                CompleteTestBefore
+                MadeBy {
+                    data {
+                        id
+                    }
+                }
+                Tasks(pagination: $tasksPagination2) {
+                    data {
+                        id
+                    }
+                }
+                publishedAt
+                slug
+                AssignedTo(pagination: $assignedToPagination2) {
+                    data {
+                        id
+                    }
+                }
+            }
+        }
+    }
+}
+
+query LoadTestInfoBySlug($filters: TestFiltersInput) {
+    tests(filters: $filters) {
+        data {
+            id
+        }
+    }
+}

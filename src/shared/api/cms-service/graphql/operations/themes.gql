@@ -1,0 +1,44 @@
+query LoadThemesData(
+    $sort: [String]
+    $publicationState: PublicationState
+    $pagination: PaginationArg
+    $taskThemesPagination2: PaginationArg
+    $taskThemesPublicationState2: PublicationState
+    $filters: OrderedTaskThemeFiltersInput
+    $taskThemesFilters2: TaskThemeFiltersInput
+) {
+    orderedTaskThemes(
+        sort: $sort
+        publicationState: $publicationState
+        pagination: $pagination
+        filters: $filters
+    ) {
+        data {
+            id
+            attributes {
+                ExamPosition
+                Title
+                slug
+                BlockColor
+            }
+        }
+    }
+    taskThemes(
+        pagination: $taskThemesPagination2
+        publicationState: $taskThemesPublicationState2
+        filters: $taskThemesFilters2
+    ) {
+        data {
+            id
+            attributes {
+                OrderedTaskTheme {
+                    data {
+                        id
+                    }
+                }
+                Title
+                slug
+            }
+        }
+    }
+}

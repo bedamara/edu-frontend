@@ -1,0 +1,64 @@
+query LoadTasksData($pagination: PaginationArg, $publicationState: PublicationState, $sort: [String], $filters: TaskFiltersInput) {
+    tasks(pagination: $pagination, publicationState: $publicationState, sort: $sort, filters: $filters) {
+        data {
+            id
+            attributes {
+                AnswerDescription
+                Description
+                File {
+                    data {
+                        id
+                        attributes {
+                            url
+                            caption
+                            alternativeText
+                        }
+                    }
+                }
+                Theme {
+                    data {
+                        id
+                        attributes {
+                            OrderedTaskTheme {
+                                data {
+                                    id
+                                    attributes {
+                                        ExamPosition
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                slug
+                Answer
+            }
+        }
+    }
+}
+
+query LoadTasksWithAnswers($pagination: PaginationArg, $publicationState: PublicationState, $sort: [String], $filters: TaskFiltersInput) {
+    tasks(pagination: $pagination, publicationState: $publicationState, sort: $sort, filters: $filters) {
+        data {
+            id
+            attributes {
+                Answer
+            }
+        }
+    }
+}
+
+query LoadTasksList($publicationState: PublicationState, $pagination: PaginationArg, $sort: [String]) {
+    tasks(publicationState: $publicationState, pagination: $pagination, sort: $sort) {
+        data {
+            id
+            attributes {
+                Theme {
+                    data {
+                        id
+                    }
+                }
+            }
+        }
+    }
+}

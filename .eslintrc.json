@@ -1,0 +1,25 @@
+{
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:tailwindcss/recommended"
+    ],
+    "plugins": ["simple-import-sort", "tailwindcss"],
+    "rules": {
+        "no-unused-vars": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "no-var": "error",
+        "prefer-const": "warn",
+        "prettier/prettier": [
+            "warn",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "simple-import-sort/imports": "warn",
+        "simple-import-sort/exports": "warn"
+    }
+}

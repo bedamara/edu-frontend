@@ -1,0 +1,40 @@
+query LoadClassesData($filters: ClassFiltersInput, $publicationState: PublicationState, $pagination: PaginationArg) {
+    classes(filters: $filters, publicationState: $publicationState) {
+        data {
+            id
+            attributes {
+                Name
+                Students(pagination: $pagination) {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                            email
+                        }
+                    }
+                }
+                School {
+                    data {
+                        id
+                        attributes {
+                            Name
+                        }
+                    }
+                }
+                Teacher {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                            middleName
+                            email
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
